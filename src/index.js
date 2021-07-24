@@ -48,7 +48,7 @@ function readFolder(path) {
     const isDir = Fs.lstatSync(fullPath).isDirectory();
     if (isDir) {
       folders.add(fullPath);
-    } else {
+    } else if (file === 'task.js') {
       files.add(fullPath);
     }
   });
@@ -57,7 +57,11 @@ function readFolder(path) {
       const folderFiles = readFolder(folder);
 
       if (folderFiles.size) {
-        folderFiles.forEach((file) => files.add(file));
+        folderFiles.forEach((file) => {
+          if (!files.has(file)) {
+            files.add(file);
+          }
+        });
       }
     });
   }
@@ -74,8 +78,12 @@ module.exports = ({ customPath } = {}) => {
   const fullPath = customPath
     ? Path.join(process.env.INIT_CWD || process.cwd(), customPath)
     : Path.join(process.env.INIT_CWD || process.cwd());
-
   const files = readFolder(fullPath);
+
+  if (files.size === 0) {
+    logger.warn('Tasks not found');
+  }
+
   files.forEach((file) => {
     const taskFile = require(file);
     if (taskFile instanceof Task) {
