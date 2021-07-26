@@ -11,8 +11,16 @@ const { spawn } = require('child_process');
 const logger = require('node-color-log');
 const Task = require('./tasks');
 
-function spawnTask(task, file) {
-  task.balancers.forEach((balancer) => {
+async function spawnTask(task, file) {
+  let balancers;
+
+  if (typeof task.balancers === 'function') {
+    balancers = await task.balancers();
+  } else {
+    balancers = task.balancers;
+  }
+
+  balancers.forEach((balancer) => {
     const taskBalancer = spawn('node', [
       Path.join(__dirname, 'manager.js'),
       file,

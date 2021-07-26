@@ -13,7 +13,7 @@ class Task {
         name: Joi.string().required(),
         interval: Joi.number().default(0),
         task: Joi.function().required(),
-        balancers: Joi.array().default([0]),
+        balancers: Joi.alternatives().try(Joi.array(), Joi.function()).default([0]),
       }).validate(data);
 
     if (validTaskParams.error) {
