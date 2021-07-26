@@ -8,7 +8,8 @@ const {loader} = require('task-manager');
 loader();
 ```
 
-# Instalation
+## Instalation
+---
 
 This is a [Node.js](https://nodejs.org/en/) module available through the [npm registry](https://www.npmjs.com/).
 
@@ -23,4 +24,12 @@ Installation is done using the
 ```bash
 $ npm install tasks-manager
 ```
-
+## Features
+---
+* Autoloader of tasks
+* Async/Sync Tasks
+* Interval Time assignation
+* Execution after finish the previous execution
+* Balancers Logic
+* Dynamic Balancer
+* Process per task and balancer
