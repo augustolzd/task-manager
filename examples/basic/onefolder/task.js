@@ -1,4 +1,4 @@
-const Task = require('../../../src/tasks');
+const { Task } = require('../../../src');
 
 module.exports = new Task({
   name: 'Test',

@@ -82,7 +82,7 @@ function readFolder(path) {
  * @param {string} param0.customPath Path to the folder to looking the express routes.
  */
 
-module.exports = ({ customPath } = {}) => {
+function loader({ customPath } = {}) {
   const fullPath = customPath
     ? Path.join(process.env.INIT_CWD || process.cwd(), customPath)
     : Path.join(process.env.INIT_CWD || process.cwd());
@@ -98,4 +98,9 @@ module.exports = ({ customPath } = {}) => {
       spawnTask(taskFile, file);
     }
   });
+}
+
+module.exports = {
+  loader,
+  Task,
 };

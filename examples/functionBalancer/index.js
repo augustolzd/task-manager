@@ -1,3 +1,3 @@
-const taskLoader = require('../../src/index');
+const { loader } = require('../../src/index');
 
-taskLoader();
+loader();
