@@ -19,8 +19,7 @@ async function spawnTask(task, file) {
   } else {
     balancers = task.balancers;
   }
-
-  balancers.forEach((balancer) => {
+  const tasks = balancers.map((balancer) => {
     const taskBalancer = spawn('node', [
       Path.join(__dirname, 'manager.js'),
       file,
@@ -35,14 +34,17 @@ async function spawnTask(task, file) {
       logger.error(`${data.toString().trim()}`);
     });
 
-    process.on('SIGINT', () => {
-      taskBalancer.kill('SIGINT');
-    });
-
     taskBalancer.on('close', (code) => {
       logger.warn(
         `TASK ${task.name}:${balancer} exits with code "${code}"`,
       );
+    });
+    return taskBalancer;
+  });
+
+  process.on('SIGINT', () => {
+    tasks.forEach((taskToKill) => {
+      taskToKill.kill('SIGINT');
     });
   });
 }

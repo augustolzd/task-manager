@@ -6,14 +6,13 @@ module.exports = new Task({
   async task(balancer) {
     console.log(`Hi, I m just a greater! the task with name ${this.name} and my name is ${balancer}`);
   },
-  interval: 500,
+  interval: 10000,
 
   async  balancers() {
-    const balancers = await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(['Value A', 'Value B']);
-      });
-    }, 300);
-    return balancers;
+    const balacing = new Set();
+    for (let i = 0; i < 15; i += 1) {
+      balacing.add(i);
+    }
+    return [...balacing];
   },
 });
