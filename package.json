@@ -1,6 +1,6 @@
 {
   "name": "tasks-manager",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Simple and useful tasks manager for nodejs.",
   "main": "src/index.js",
   "scripts": {
