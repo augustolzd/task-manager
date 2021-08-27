@@ -13,15 +13,15 @@ async function handleTask() {
     handleTask();
   }
 }
-async function initTask() {
+async function initTask(balancer) {
   if (task.init && typeof task.init === 'function') {
-    await task.init();
+    await task.init(balancer);
   }
 
   handleTask();
 }
 
-initTask();
+initTask(balancer);
 
 process.on('SIGINT', (signal) => {
   process.exit(signal);
