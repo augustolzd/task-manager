@@ -12,15 +12,15 @@ async function handleTask() {
     }, task.interval * 1000 || 1000);
   });
 }
-
-async function initTask() {
+// eslint-disable-next-line no-shadow
+async function initTask(balancer) {
   if (task.init && typeof task.init === 'function') {
-    await task.init();
+    await task.init(balancer);
   }
   handleTask();
 }
 
-initTask();
+initTask(balancer);
 
 process.on('SIGINT', (signal) => {
   process.exit(signal);
