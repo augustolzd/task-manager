@@ -11,6 +11,8 @@ async function handleTask() {
       resolve();
     }, task.interval * 1000 || 1000);
   });
+
+  handleTask();
 }
 // eslint-disable-next-line no-shadow
 async function initTask(balancer) {
