@@ -39,6 +39,12 @@ async function spawnTask(task, file) {
         `TASK ${task.name}:${balancer} exits with code "${code}"`,
       );
     });
+
+    taskBalancer.on('error', (message) => {
+      logger.error(
+        `TASK ERROR ${task.name}:${balancer} exits with code "${message}"`,
+      );
+    });
     return taskBalancer;
   });
 
