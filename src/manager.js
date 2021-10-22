@@ -31,3 +31,11 @@ process.on('SIGINT', (signal) => {
 process.on('close', (code) => {
   console.log(code);
 });
+
+process.on('error', (error) => {
+  console.error(error);
+});
+
+process.on('warning', ({ message, stack }) => {
+  console.warn(message, stack);
+});
